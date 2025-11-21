@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy Monthversary 💜</title>
+  <style>
+    :root {
+      --purple:#7c3aed;
+      --pink:#f7c6e7;
+      --white:#fff;
+      font-family:'Poppins',system-ui,-apple-system,'Segoe UI',Roboto,Arial;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      overflow-x:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:100vh;
+      background:radial-gradient(circle at top left,#3b1560,#2b0b3a 60%,#6a2a8a);
+      color:var(--white);
+    }
+    .container{width:100%;max-width:900px;padding:20px;position:relative;z-index:1;}
+    .card{
+      background:rgba(255,255,255,0.05);
+      backdrop-filter:blur(10px);
+      border-radius:20px;
+      box-shadow:0 8px 30px rgba(124,58,237,0.25);
+      padding:30px;
+      animation:fadeIn 1.6s ease;
+    }
+    header{text-align:center;margin-bottom:20px;}
+    header h1{font-size:32px;letter-spacing:1px;}
+    header p{color:var(--pink);font-weight:600;margin-top:8px;}
+
+    .slideshow{
+      position:relative;
+      width:320px;height:420px;
+      margin:0 auto;
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow:0 0 25px rgba(124,58,237,0.4);
+      border:3px solid rgba(255,255,255,0.1);
+      animation:glow 3s ease-in-out infinite alternate;
+      touch-action: pan-y;
+      cursor: grab;
+    }
+    @keyframes glow{
+      from{box-shadow:0 0 20px rgba(124,58,237,0.3);}
+      to{box-shadow:0 0 35px rgba(247,198,231,0.6);}
+    }
+    .slide{position:absolute;inset:0;opacity:0;transition:opacity 1.5s ease;display:flex;align-items:center;justify-content:center;}
+    .slide.active{opacity:1;}
+    .slide img,.slide video{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:18px;
+    }
+
+    .dots{display:flex;justify-content:center;gap:8px;margin-top:12px;}
+    .dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.4);cursor:pointer;transition:all .3s}
+    .dot.active{background:var(--pink);transform:scale(1.2);}
+    .message{text-align:center;margin-top:24px;}
+    .typing{font-size:22px;color:var(--pink);font-weight:600;min-height:28px;}
+    .buttons{margin-top:10px;text-align:center;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;}
+    .btn{
+      background:var(--pink);color:#3b1458;padding:10px 18px;border:none;border-radius:10px;
+      cursor:pointer;font-weight:700;transition:all .3s;
+    }
+    .btn:hover{transform:scale(1.05);}
+    footer{text-align:center;margin-top:20px;font-size:13px;opacity:0.7;}
+    .heart{position:fixed;top:-10px;color:rgba(247,198,231,0.8);font-size:16px;animation:fall 5s linear forwards;}
+    @keyframes fall{to{transform:translateY(110vh);opacity:0;}}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);} }
+    .cursor-heart{position:fixed;color:#f7c6e7;font-size:12px;pointer-events:none;animation:cursorPop 1s ease-out forwards;}
+    @keyframes cursorPop{from{transform:scale(1);opacity:1;}to{transform:scale(3);opacity:0;}}
+
+    /* popup card */
+    .popup{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.55);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      opacity:0;
+      visibility:hidden;
+      transition:opacity .4s ease, visibility .4s ease;
+      z-index:9999;
+    }
+    .popup.active{
+      opacity:1;
+      visibility:visible;
+    }
+    .popup-card{
+      background:rgba(255,255,255,0.08);
+      backdrop-filter:blur(12px);
+      border-radius:20px;
+      padding:30px;
+      width:90%;
+      max-width:420px;
+      text-align:center;
+      box-shadow:0 0 40px rgba(247,198,231,0.4);
+      animation:zoomIn .4s ease;
+    }
+    @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .popup-card h2{color:var(--pink);margin-bottom:10px;}
+    .popup-card p{margin-bottom:10px;line-height:1.5;}
+    .popup-card .verse{font-style:italic;color:#ffd6f5;}
+    .close-btn{
+      margin-top:15px;
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.4);
+      color:#fff;
+      padding:6px 14px;
+      border-radius:8px;
+      cursor:pointer;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width:768px){
+      header h1{font-size:26px;}
+      header p{font-size:14px;}
+      .slideshow{width:260px;height:340px;}
+      .typing{font-size:18px;}
+      .btn{padding:8px 14px;font-size:14px;}
+      footer{font-size:12px;}
+      .popup-card{padding:20px;}
+    }
+    @media (max-width:480px){
+      .card{padding:20px;}
+      header h1{font-size:22px;}
+      header p{font-size:13px;}
+      .slideshow{width:230px;height:300px;}
+      .typing{font-size:16px;}
+      .btn{padding:8px 12px;font-size:13px;}
+      .popup-card h2{font-size:18px;}
+      .popup-card p{font-size:14px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <header>
+        <h1>Happy 2th Monthversary 💜</h1>
+        <p>A glimpse of our little adventures from these past 2 months.</p>
+      </header>
+
+      <div class="slideshow" id="slideshow">
+        <div class="slide active"><img src="photo1.jpg" alt="photo1"></div>
+        <div class="slide"><img src="photo2.jpg" alt="photo2"></div>
+        <div class="slide"><img src="photo3.jpg" alt="photo3"></div>
+        <div class="slide"><img src="photo4.jpg" alt="photo4"></div>
+        <div class="slide"><img src="photo5.jpg" alt="photo5"></div>
+        <div class="slide"><img src="photo6.jpg" alt="photo6"></div>
+        <div class="slide"><img src="photo7.jpg" alt="photo7"></div>
+        <div class="slide"><img src="photo8.jpg" alt="photo8"></div>
+        <div class="slide"><img src="photo9.jpg" alt="photo9"></div>
+        <div class="slide"><img src="photo10.jpg" alt="photo10"></div>
+        <div class="slide"><img src="photo11.jpg" alt="photo11"></div>
+        <div class="slide"><img src="photo12.jpg" alt="photo12"></div>
+      </div>
+
+      <div class="dots" id="dots"></div>
+
+      <div class="message">
+        <div class="typing" id="typingText"></div>
+        <div class="buttons">
+          <audio id="bgm" loop>
+            <source src="music.mp3" type="audio/mpeg">
+          </audio>
+          <button class="btn" id="toggleMusic">Play Music 🎶</button>
+          <button class="btn" id="openCard">Open Card 💌</button>
+        </div>
+      </div>
+
+      <footer>© 2025 — This little site is made only for my favorite person 💜</footer>
+    </div>
+  </div>
+
+  <!-- Popup -->
+  <div class="popup" id="popup">
+    <div class="popup-card">
+      <h2>For You 🦋</h2>
+<p>
+“Thank you, Saljean, for showing me what real love truly feels like.  
+A love that doesn’t rush, doesn’t demand, and never forces itself to be understood—  
+but grows gently, steadily, and honestly.  
+With you, I’ve learned that love isn’t always loud or dramatic;  
+sometimes it is quiet, patient, and softly breathtaking.  
+You’ve become the calm in my storms, the warmth in my nights,  
+and the comfort my heart always searches for.  
+I love you more than words can ever shape, more than distance can ever test.”
+</p>
+
+<p class="verse">
+“Love is patient, love is kind.  
+It does not envy, it does not boast, it is not proud.”  
+<br>— 1 Corinthians 13:4 ✝️
+</p>
+
+      <button class="close-btn" id="closeCard">Close 💜</button>
+    </div>
+  </div>
+
+  <script>
+    // slideshow setup
+    const slides = document.querySelectorAll('.slide');
+    const dotsWrap = document.getElementById('dots');
+    let idx = 0, timer;
+
+    slides.forEach((s,i)=>{
+      const d=document.createElement('div');
+      d.className='dot'+(i===0?' active':'');
+      d.addEventListener('click',()=>goTo(i));
+      dotsWrap.appendChild(d);
+    });
+    const dots=document.querySelectorAll('.dot');
+
+    function show(){
+      slides.forEach((s,i)=>s.classList.toggle('active',i===idx));
+      dots.forEach((d,i)=>d.classList.toggle('active',i===idx));
+    }
+
+    function next(){idx=(idx+1)%slides.length; show();}
+
+    function goTo(i){idx=i; show(); reset();}
+
+    function reset(){clearInterval(timer); timer=setInterval(next,5000);}
+    reset();
+
+    // swipe / drag
+    const slideshowEl = document.getElementById('slideshow');
+    let startX=0, isDragging=false, mouseDown=false;
+
+    slideshowEl.addEventListener('touchstart', e => { startX=e.touches[0].clientX; isDragging=true; });
+    slideshowEl.addEventListener('touchmove', e => {
+      if(!isDragging) return;
+      const diff = e.touches[0].clientX - startX;
+      if(diff>50){ idx=(idx-1+slides.length)%slides.length; show(); reset(); isDragging=false; }
+      else if(diff<-50){ idx=(idx+1)%slides.length; show(); reset(); isDragging=false; }
+    });
+    slideshowEl.addEventListener('touchend', ()=>{isDragging=false;});
+
+    slideshowEl.addEventListener('mousedown', e => { startX=e.clientX; mouseDown=true; });
+    slideshowEl.addEventListener('mousemove', e => {
+      if(!mouseDown) return;
+      const diff = e.clientX - startX;
+      if(diff>50){ idx=(idx-1+slides.length)%slides.length; show(); reset(); mouseDown=false; }
+      else if(diff<-50){ idx=(idx+1)%slides.length; show(); reset(); mouseDown=false; }
+    });
+    slideshowEl.addEventListener('mouseup', ()=>mouseDown=false);
+    slideshowEl.addEventListener('mouseleave', ()=>mouseDown=false);
+
+    // typing effect
+    const text="To my favorite person, always!";
+    const typing=document.getElementById('typingText');
+    let i=0;
+    function type(){ if(i<text.length){typing.textContent+=text.charAt(i);i++; setTimeout(type,100);} }
+    type();
+
+    // music play/pause
+    const bgm=document.getElementById('bgm');
+    const toggleMusicBtn=document.getElementById('toggleMusic');
+    toggleMusicBtn.addEventListener('click', async ()=>{
+      try{
+        if(bgm.paused){ await bgm.play(); toggleMusicBtn.textContent='Pause Music ⏸️'; }
+        else{ bgm.pause(); toggleMusicBtn.textContent='Play Music 🎶'; }
+      } catch { alert('Klik tombol lagi untuk mulai musik 💜'); }
+    });
+
+    // hearts falling
+    function createHeart(){
+      const heart=document.createElement('div');
+      heart.className='heart';
+      heart.style.left=Math.random()*100+'vw';
+      heart.style.fontSize=12+Math.random()*10+'px';
+      heart.textContent='💜';
+      document.body.appendChild(heart);
+      setTimeout(()=>heart.remove(),5000);
+    }
+    setInterval(createHeart,600);
+
+    // cursor heart
+    document.addEventListener('mousemove',e=>{
+      const h=document.createElement('div');
+      h.className='cursor-heart';
+      h.textContent='💖';
+      h.style.left=e.pageX+'px';
+      h.style.top=e.pageY+'px';
+      document.body.appendChild(h);
+      setTimeout(()=>h.remove(),1000);
+    });
+
+    // popup card
+    const popup=document.getElementById('popup');
+    document.getElementById('openCard').addEventListener('click',()=>popup.classList.add('active'));
+    document.getElementById('closeCard').addEventListener('click',()=>popup.classList.remove('active'));
+  </script>
+</body>
+</html>
